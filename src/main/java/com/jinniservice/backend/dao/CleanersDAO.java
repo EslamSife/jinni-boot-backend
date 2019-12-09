@@ -8,7 +8,7 @@ import java.util.List;
 public interface CleanersDAO {
 
 
-    // test
+    // remove all public modifier
      List<Cleaners> findAll();
 
      void save(Cleaners theCleaner);
