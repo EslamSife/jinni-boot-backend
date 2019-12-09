@@ -7,12 +7,14 @@ import java.util.List;
 
 public interface CleanersDAO {
 
-    public List<Cleaners> findAll();
 
-    public void save(Cleaners theCleaner);
+    // test
+     List<Cleaners> findAll();
 
-    public void deleteById(int cleanerId);
+     void save(Cleaners theCleaner);
 
-    public Cleaners getCleanerById(int cleanerId);
+     void deleteById(int cleanerId);
+
+     Cleaners getCleanerById(int cleanerId);
 
 }
