@@ -11,6 +11,8 @@ public interface CleanersDAO {
     // remove all public modifier
      List<Cleaners> findAll();
 
+
+     // test
      void save(Cleaners theCleaner);
 
      void deleteById(int cleanerId);
