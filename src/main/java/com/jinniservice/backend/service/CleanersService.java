@@ -1,19 +1,19 @@
 package com.jinniservice.backend.service;
 
 
-import com.jinniservice.backend.entites.Cleaners;
+import com.jinniservice.backend.entites.Cleaner;
 
 import java.util.List;
 
 public interface CleanersService {
 
 
-    public List<Cleaners> findAll();
+    List<Cleaner> findAll();
 
-    public void save(Cleaners theCleaner);
+    void save(Cleaner theCleaner);
 
-    public void deleteById(int cleanerId);
+    void deleteById(int cleanerId);
 
-    public Cleaners getCleanerById(int cleanerId);
+    Cleaner getCleanerById(int cleanerId);
 
 }

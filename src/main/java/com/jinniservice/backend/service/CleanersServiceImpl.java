@@ -1,44 +1,49 @@
 package com.jinniservice.backend.service;
 
-import com.jinniservice.backend.dao.CleanersDAO;
-import com.jinniservice.backend.entites.Cleaners;
+import com.jinniservice.backend.dao.CleanerRepository;
+import com.jinniservice.backend.entites.Cleaner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CleanersServiceImpl implements CleanersService {
 
-    private CleanersDAO cleanersDAO;
+    private CleanerRepository cleanerRepository;
 
     @Autowired
-    public CleanersServiceImpl(CleanersDAO cleanersDAO) {
-        this.cleanersDAO = cleanersDAO;
+    public CleanersServiceImpl(CleanerRepository cleanerRepository) {
+        this.cleanerRepository = cleanerRepository;
     }
 
     @Override
-    @Transactional
-    public List<Cleaners> findAll() {
-        return cleanersDAO.findAll();
+    public List<Cleaner> findAll() {
+        return cleanerRepository.findAll();
     }
 
     @Override
-    @Transactional
-    public void save(Cleaners theCleaner) {
-        cleanersDAO.save(theCleaner);
+    public void save(Cleaner theCleaner) {
+        cleanerRepository.save(theCleaner);
     }
 
     @Override
-    @Transactional
     public void deleteById(int cleanerId) {
-        cleanersDAO.deleteById(cleanerId);
+        cleanerRepository.deleteById(cleanerId);
     }
 
     @Override
-    @Transactional
-    public Cleaners getCleanerById(int cleanerId) {
-        return cleanersDAO.getCleanerById(cleanerId);
+    public Cleaner getCleanerById(int cleanerId) {
+        Optional<Cleaner> result =  cleanerRepository.findById(cleanerId);
+        Cleaner theCleaner;
+        if(result.isPresent()) {
+            theCleaner = result.get();
+        } else {
+            // we did not find the cleaner
+            throw new RuntimeException("did not find the cleaner with id - " + cleanerId);
+        }
+        return theCleaner;
     }
 }
