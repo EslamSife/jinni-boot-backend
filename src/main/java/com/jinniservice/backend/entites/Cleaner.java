@@ -2,7 +2,9 @@ package com.jinniservice.backend.entites;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Cleaner")
@@ -13,7 +15,7 @@ public class Cleaner {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "fullname")
+    @Column(name = "fullName")
     private String fullName;
 
     @Column(name = "phone")
@@ -42,6 +44,7 @@ public class Cleaner {
 
     @Column(name = "rateresetdate")
     private Date rateResetDate;
+
 
 
     @Column(name = "rate")
@@ -77,6 +80,12 @@ public class Cleaner {
     private int updatedBy;
 
 
+    @OneToMany(mappedBy = "cleaner", cascade  = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    private List<CleanerOrder> cleanerOrders;
+
+    @OneToMany(mappedBy = "cleanerId", cascade = CascadeType.ALL)
+    private List<CleanerAvailability_underInvestigation> cleanerAvailability_underInvestigations;
+
     public Cleaner() {
 
     }
@@ -84,7 +93,7 @@ public class Cleaner {
 
     public Cleaner(String fullName, String phone, String email, String password, Date rateresetdate,
                     String nationalId, Date birthDate, String profilePicture, int isRateReset, int isActive, int platform, long platFormToken,
-                    Date createdOn, int createdBy, int updatedBy, Date updatedOn, float rate, int rank) {
+                    Date createdOn, int createdBy, int updatedBy, Date updatedOn, float rate, int rank,List<CleanerAvailability_underInvestigation> cleanerAvailability_underInvestigations, List<CleanerOrder> cleanerOrders) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
@@ -103,6 +112,8 @@ public class Cleaner {
         this.updatedOn = updatedOn;
         this.rate = rate;
         this.rank = rank;
+        this.cleanerAvailability_underInvestigations = cleanerAvailability_underInvestigations;
+        this.cleanerOrders = cleanerOrders;
     }
 
 
@@ -292,5 +303,34 @@ public class Cleaner {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+
+    public List<CleanerAvailability_underInvestigation> getCleanerAvailability_underInvestigations() {
+        return cleanerAvailability_underInvestigations;
+    }
+
+    public void setCleanerAvailability_underInvestigations(List<CleanerAvailability_underInvestigation> cleanerAvailability_underInvestigations) {
+        this.cleanerAvailability_underInvestigations = cleanerAvailability_underInvestigations;
+    }
+
+
+    public List<CleanerOrder> getCleanerOrders() {
+        return cleanerOrders;
+    }
+
+    public void setCleanerOrders(List<CleanerOrder> cleanerOrders) {
+        this.cleanerOrders = cleanerOrders;
+    }
+
+
+
+    public void add(CleanerOrder theOrderOfCleaner) {
+        if(cleanerOrders == null) {
+            cleanerOrders = new ArrayList<>();
+        }
+
+        cleanerOrders.add(theOrderOfCleaner);
+        theOrderOfCleaner.setCleaner(this);
     }
 }

@@ -4,26 +4,31 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "CleanersAvailability")
-public class CleanersAvailability {
+@Table(name = "CleanerAvailability")
+public class CleanerAvailability_underInvestigation {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "cleanerid")
+
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    @JoinColumn(name = "cleanerId")
     private Cleaner cleanerId;
+
+
     @Column(name = "availability")
     private String availability;
     @Column(name = "availabledate")
     private Date availableDate;
 
 
-    public CleanersAvailability() {
+    public CleanerAvailability_underInvestigation() {
     }
 
-    public CleanersAvailability(Cleaner cleanerId, String availability, Date availableDate) {
+    public CleanerAvailability_underInvestigation(Cleaner cleanerId, String availability, Date availableDate) {
         this.cleanerId = cleanerId;
         this.availability = availability;
         this.availableDate = availableDate;
@@ -65,9 +70,9 @@ public class CleanersAvailability {
 
     @Override
     public String toString() {
-        return "CleanersAvailability{" +
+        return "CleanerAvailability_underInvestigation{" +
                 "id=" + id +
-                ", cleanerId=" + cleanerId +
+                //     ", cleanerId=" + cleanerId +
                 ", availability='" + availability + '\'' +
                 ", availableDate=" + availableDate +
                 '}';

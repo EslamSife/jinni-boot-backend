@@ -27,8 +27,11 @@ public class Admin {
     private  short isSuperAdmin;
     @Column(name = "canmanagersuper")
     private short canManagerSuper;
+    /*
     @Column(name = "roleid")
     private List<Role> roleId;
+
+    */
     @Column(name = "isactive")
     private short isactive;
     @Column(name = "createdon")
@@ -54,7 +57,7 @@ public class Admin {
         this.password = password;
         this.isSuperAdmin = isSuperAdmin;
         this.canManagerSuper = canManagerSuper;
-        this.roleId = roleId;
+       // this.roleId = roleId;
         this.isactive = isactive;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
@@ -127,6 +130,7 @@ public class Admin {
         this.canManagerSuper = canManagerSuper;
     }
 
+    /*
     public List<Role> getRoleId() {
         return roleId;
     }
@@ -134,7 +138,7 @@ public class Admin {
     public void setRoleId(List<Role> roleId) {
         this.roleId = roleId;
     }
-
+*/
     public short getIsactive() {
         return isactive;
     }
@@ -187,7 +191,7 @@ public class Admin {
                 ", password='" + password + '\'' +
                 ", isSuperAdmin=" + isSuperAdmin +
                 ", canManagerSuper=" + canManagerSuper +
-                ", roleId=" + roleId +
+               // ", roleId=" + roleId +
                 ", isactive=" + isactive +
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
